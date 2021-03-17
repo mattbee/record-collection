@@ -11,4 +11,8 @@ RSpec.describe Artist, type: :model do
     artist.name = ''
     expect(artist).to_not be_valid
   end
+
+  it 'returns name for to_s method' do
+    expect(artist.to_s).to eq(artist.name)
+  end
 end

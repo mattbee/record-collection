@@ -11,4 +11,8 @@ RSpec.describe Condition, type: :model do
     condition.state = ''
     expect(condition).to_not be_valid
   end
+
+  it 'returns name for to_s method' do
+    expect(condition.to_s).to eq(condition.state)
+  end
 end
