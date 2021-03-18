@@ -59,7 +59,14 @@ function Home() {
           Greg's record collection
         </h1>
 
-        <div className="search">
+        <div className="nav">
+          <ul>
+          <li><Link href='/'>Home</Link></li>
+          <li><Link href='/add'>Add Record</Link></li>
+          </ul>
+        </div>
+
+        <div className={styles.search}>
           <label htmlFor="search">Search</label>
           <input name="search" onChange={doSearch} defaultValue={searchString} />
         </div>

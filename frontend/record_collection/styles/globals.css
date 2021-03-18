@@ -26,3 +26,20 @@ label {
 .formRow {
   margin-bottom: 1em;
 }
+
+.nav {
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 0 0 2em;
+  padding: 0;
+}
+
+.nav ul li {
+  display: inline-block;
+  margin-right: 2em;
+}

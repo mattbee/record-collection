@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link';
 import styles from '../styles/Home.module.css'
 import { useEffect, useState} from 'react';
 import { useRouter } from 'next/router'
@@ -60,8 +61,20 @@ function AddRecord() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Add record
+          Greg's record collection
         </h1>
+
+        <div className="nav">
+          <ul>
+          <li><Link href='/'>Home</Link></li>
+          <li><Link href='/add'>Add Record</Link></li>
+          </ul>
+        </div>
+
+
+        <h2 className={styles.title}>
+          Add record
+        </h2>
 
         <RecordForm onSubmit={handleSubmit(onSubmit)} register={register}  buttonText='Add record' conditions={conditions} />
 

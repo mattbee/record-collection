@@ -36,3 +36,7 @@
     flex-direction: column;
   }
 }
+
+.search {
+  margin-bottom: 2em;
+}
