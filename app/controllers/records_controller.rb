@@ -11,6 +11,17 @@ class RecordsController < ApplicationController
     render json: serializer.new(paginated_records.items, options), status: :ok
   end
 
+  def create
+    record = Record.new(record_params)
+    if record.valid?
+      record.save
+      render json: record, status: :created
+    else
+      render json: record.errors, adapter: :json_api,
+      status: :unprocessable_entity
+    end
+  end
+
   private
 
   def serializer
@@ -23,5 +34,10 @@ class RecordsController < ApplicationController
 
   def pagination_params
     params.permit![:page]
+  end
+
+  def record_params
+    params.require(:data).require(:attributes).permit(:title, :release_year, :artist_id, :condition_id) ||
+    ActionController::Parameters.new
   end
 end

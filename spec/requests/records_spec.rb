@@ -41,4 +41,36 @@ RSpec.describe RecordsController, type: :request do
     end
   end
 
+  describe '#create' do
+    let(:condition) { FactoryBot.create(:condition) }
+    let(:artist) { FactoryBot.create(:artist) }
+    let(:valid_attrs) do
+      {
+        "data": {
+          "attributes": {
+            "title": "Be more kind",
+            "release_year": 2018,
+            "artist_id": artist.id,
+            "condition_id": condition.id
+          }
+        }
+      }
+    end
+
+    it 'fails when invalid params provided' do
+      post '/records', params: { data: { attributes: { title: '', release_year: nil, artist_id: nil, condition_id: nil } } }
+      expect(response.status).to be(422)
+    end
+
+    it 'returns 201 created response when valid params provided' do
+      post '/records', params: valid_attrs
+      expect(response.status).to be(201)
+    end
+
+    it 'saves record to database when valid params provided' do
+      post '/records', params: valid_attrs
+      record = Record.first
+      expect(record.title).to eq('Be more kind')
+    end
+  end
 end
