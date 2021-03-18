@@ -19,8 +19,6 @@ function EditRecord({id}) {
   axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
 
   const fetchData = async () => {
-    console.log('fetch', id);
-
     await axios.get(`http://localhost:3000/records/${id}`)
         .then(res => {
           setError(false);

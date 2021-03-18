@@ -6,6 +6,8 @@ import axios from 'axios';
 
 function Home() {
   const [records, setRecords] = useState([]);
+  const [searchString, setSearchString] = useState();
+  const [searchResults, setSearchResults] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [pageMeta, setPageMeta] = useState(1);
@@ -28,6 +30,23 @@ function Home() {
     fetchData();
   }, []);
 
+  const doSearch = (event) => {
+    setSearchString(event.target.value);
+
+    if(event.target.value < 3) {
+      setSearchResults(undefined);
+      console.log(searchResults)
+    } else {
+      if(event.target.value.length > 2) {
+        axios.get(`http://localhost:3000/search/${searchString}`)
+          .then(res => {
+            setError(false);
+            setSearchResults(res.data.data);
+          });
+      }
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -39,6 +58,18 @@ function Home() {
         <h1 className={styles.title}>
           Greg's record collection
         </h1>
+
+        <div className="search">
+          <label htmlFor="search">Search</label>
+          <input name="search" onChange={doSearch} defaultValue={searchString} />
+        </div>
+
+        {searchResults && <ul>
+          {searchResults.map((result, key) => (
+            <li key={key}>{result.attributes.title}</li>
+          ))}
+        </ul>}
+
         {!error && loading && <div>Loading data...</div>}
         {error && <div>There was an error.</div>}
         <div>

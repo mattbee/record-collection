@@ -40,6 +40,11 @@ class RecordsController < ApplicationController
     end
   end
 
+  def search
+    record = Record.where("title like ?", "%#{params[:text]}%")
+    render json: serializer.new(record), status: :ok
+  end
+
   private
 
   def serializer
