@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link';
 import styles from '../styles/Home.module.css'
 import { useEffect, useState} from 'react';
 import axios from 'axios';
@@ -49,6 +50,7 @@ function Home() {
                   <th>Artist</th>
                   <th>Released</th>
                   <th>Condition</th>
+                  <th>Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -58,6 +60,7 @@ function Home() {
                     <td>{record.attributes.artist}</td>
                     <td>{record.attributes.release_year}</td>
                     <td>{record.attributes.condition}</td>
+                    <td><Link href={`edit/${record.id}`}>Edit</Link></td>
                   </tr>
                 ))}
               </tbody>

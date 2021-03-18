@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import RecordForm from '../components/RecordForm';
 
 function AddRecord() {
   const router = useRouter()
@@ -27,10 +28,6 @@ function AddRecord() {
     });
   };
 
-  useEffect(() => {
-    //fetchData();
-  }, []);
-
   return (
     <div className={styles.container}>
       <Head>
@@ -43,31 +40,7 @@ function AddRecord() {
           Add record
         </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="formRow">
-            <label htmlFor="record">Record title</label>
-            <input type="text" name="attributes[title]" ref={register({ required: true })} />
-          </div>
-          <div className="formRow">
-            <label htmlFor="record">Year of release</label>
-            <input type="text" name="attributes[release_year]" ref={register({ required: true })} />
-          </div>
-          <div className="formRow">
-            <label htmlFor="record">Artist</label>
-            <input type="text" name="attributes[artist_attributes][name]" ref={register} />
-          </div>
-
-          <div className="formRow">
-            <label htmlFor="record">Condition</label>
-            <select name="attributes[condition_id]" ref={register}>
-              <option value="1">Brand New</option>
-              <option value="2">Nearly New</option>
-            </select>
-          </div>
-          <div className="formRow">
-            <input type="submit" value="Add record" />
-          </div>
-        </form>
+        <RecordForm onSubmit={handleSubmit(onSubmit)} register={register}  buttonText='Add record' />
 
       </main>
     </div>

@@ -11,11 +11,29 @@ class RecordsController < ApplicationController
     render json: serializer.new(paginated_records.items, options), status: :ok
   end
 
+  def show
+    record = Record.find(params[:id])
+    render json: serializer.new(record), status: :ok
+  end
+
+
   def create
     record = Record.new(record_params)
     if record.valid?
       record.save
       render json: serializer.new(record), status: :created
+    else
+      render json: record.errors, adapter: :json_api,
+      status: :unprocessable_entity
+    end
+  end
+
+  def update
+    record = Record.find(params[:id])
+    record.update(record_params)
+    if record.valid?
+      record.save
+      render json: serializer.new(record), status: :accepted
     else
       render json: record.errors, adapter: :json_api,
       status: :unprocessable_entity
