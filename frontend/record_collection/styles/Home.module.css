@@ -1,0 +1,38 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+}
+
+.main {
+  padding: 2rem;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 0 0 2em;
+  line-height: 1.15;
+  font-size: 2rem;
+}
+
+.table {
+  border-collapse: collapse;
+  border: 1px solid #333;
+}
+
+.table th, .table td {
+  padding: 0.4em;
+  text-align: left;
+  border: 1px solid #333;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
