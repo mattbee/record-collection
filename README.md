@@ -5,6 +5,9 @@ It's grown out of control and Greg needs an API to control his collection.
 
 This project uses Rails for the API to create, read, update and delete records in Greg's collection.
 
+## Architecture Decision Records (ADRs)
+Major architectural decisions are recorded as Architecture Decision Records in the folder [adr](./adr).
+
 ## Records API
 ### Installation & running the API
 
