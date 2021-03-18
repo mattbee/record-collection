@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+label {
+  display: block;
+}
+
+.formRow {
+  margin-bottom: 1em;
+}

@@ -15,7 +15,7 @@ class RecordsController < ApplicationController
     record = Record.new(record_params)
     if record.valid?
       record.save
-      render json: record, status: :created
+      render json: serializer.new(record), status: :created
     else
       render json: record.errors, adapter: :json_api,
       status: :unprocessable_entity
@@ -37,7 +37,7 @@ class RecordsController < ApplicationController
   end
 
   def record_params
-    params.require(:data).require(:attributes).permit(:title, :release_year, :artist_id, :condition_id) ||
+    params.require(:data).require(:attributes).permit(:title, :release_year, :artist_id, :condition_id, artist_attributes: [ :name ]) ||
     ActionController::Parameters.new
   end
 end
