@@ -10,8 +10,31 @@ import RecordForm from '../components/RecordForm';
 function AddRecord() {
   const router = useRouter()
 
-  const { register, handleSubmit, watch, errors } = useForm();
+  const [conditions, setConditions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  const { register, handleSubmit } = useForm();
   axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+
+  const fetchData = async () => {
+    await axios.get('http://localhost:3000/conditions')
+      .then(res => {
+        setError(false);
+        setConditions(res.data.data);
+      })
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const onSubmit = data => {
     console.log(data, { ...data} );
     axios.post('http://localhost:3000/records', {
@@ -40,7 +63,7 @@ function AddRecord() {
           Add record
         </h1>
 
-        <RecordForm onSubmit={handleSubmit(onSubmit)} register={register}  buttonText='Add record' />
+        <RecordForm onSubmit={handleSubmit(onSubmit)} register={register}  buttonText='Add record' conditions={conditions} />
 
       </main>
     </div>

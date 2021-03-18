@@ -16,8 +16,10 @@ const RecordForm = (props) => (
     <div className="formRow">
       <label htmlFor="record">Condition</label>
       <select name="attributes[condition_id]" ref={props.register}>
-        <option value="1">Brand New</option>
-        <option value="2">Nearly New</option>
+        {console.log(props.conditions)}
+        {props.conditions.map((condition, key) => (
+          <option key={key} value={condition.attributes.id}>{condition.attributes.state}</option>
+        ))}
       </select>
     </div>
     <div className="formRow">

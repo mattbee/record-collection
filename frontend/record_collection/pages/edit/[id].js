@@ -10,6 +10,7 @@ import RecordForm from '../../components/RecordForm';
 function EditRecord({id}) {
   const router = useRouter();
   const [record, setRecord] = useState();
+  const [conditions, setConditions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -24,6 +25,17 @@ function EditRecord({id}) {
         .then(res => {
           setError(false);
           setRecord(res.data.data);
+        })
+        .catch(() => {
+          setError(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    await axios.get('http://localhost:3000/conditions')
+        .then(res => {
+          setError(false);
+          setConditions(res.data.data);
         })
         .catch(() => {
           setError(true);
@@ -74,7 +86,7 @@ function EditRecord({id}) {
           Edit record {id}
         </h1>
 
-        <RecordForm onSubmit={handleSubmit(onSubmit)} formData={record} register={register} buttonText='Edit record' />
+        <RecordForm onSubmit={handleSubmit(onSubmit)} formData={record} register={register} buttonText='Edit record' conditions={conditions} />
 
       </main>
     </div>
