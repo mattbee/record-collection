@@ -13,12 +13,22 @@ To install all dependencies run
 bundle install
 ```
 
+To run migrations
+```
+bundle exec db:migrate
+```
+
 To start a webserver to run the API, use
 ```
 bundle exec rails server
 ```
 
 The API will then be available at http://localhost:3000
+
+If you would like to add a couple of Sample records, you can seed the database with:
+```
+bundle exec db:seed
+```
 
 ### Running Tests
 
